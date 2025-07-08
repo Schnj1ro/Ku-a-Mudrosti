@@ -2,58 +2,67 @@
 <!DOCTYPE html>
 <html lang="bs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kuća Mudrosti</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; color: #333; }
-    header { background: #444; color: white; padding: 1em; text-align: center; }
-    section { padding: 2em; }
-    h2 { color: #222; }
-    .book { background: white; padding: 1.5em; border-radius: 8px; margin-bottom: 1.5em; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .progress { background: #ddd; border-radius: 4px; overflow: hidden; }
-    .progress-bar { background: #4caf50; height: 20px; width: 40%; text-align: center; color: white; line-height: 20px; }
-    footer { text-align: center; padding: 1em; background: #eee; font-size: 0.9em; }
-    table { width: 100%; border-collapse: collapse; margin-top: 1em; }
-    th, td { border: 1px solid #ccc; padding: 0.5em; text-align: left; }
-    input, textarea { width: 100%; padding: 0.5em; margin-top: 0.5em; }
-    button { padding: 0.5em 1em; background: #444; color: white; border: none; cursor: pointer; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Kuća Mudrosti</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 2rem;
+            max-width: 700px;
+            margin: auto;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .section {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label, input {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .result {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <header>
     <h1>Kuća Mudrosti</h1>
-    <p>Klub ljubitelja knjige</p>
-  </header>
-
-  <section class="book">
     <h2>Knjiga mjeseca</h2>
-    <p><strong>Naziv:</strong> Knjiga o edebu – Muhammed ibn Ismail El-Buhari</p>
-    <p><strong>Vaš napredak:</strong></p>
-    <div class="progress"><div class="progress-bar">40%</div></div>
-  </section>
+    <div class="section">
+        <p><strong>Knjiga:</strong> Knjiga o edebu – Muhammed ibn Ismail El-Buhari</p>
+        <p>Unesi broj pročitanih stranica da vidiš svoj napredak:</p>
+        <label for="read">Pročitane stranice:</label>
+        <input type="number" id="read" placeholder="Npr. 47">
+        <label for="total">Ukupan broj stranica:</label>
+        <input type="number" id="total" placeholder="Npr. 300">
+        <button onclick="calculate()">Izračunaj procenat</button>
+        <p class="result" id="output"></p>
+    </div>
 
-  <section class="book">
-    <h2>Pregled pročitanih knjiga po mjesecima</h2>
-    <table>
-      <tr><th>Mjesec</th><th>Knjiga</th><th>Status</th></tr>
-      <tr><td>Maj</td><td>Imam Gazali – Ihya</td><td>Završeno</td></tr>
-      <tr><td>Juni</td><td>Ahmed Deedat – Izazov</td><td>Završeno</td></tr>
-    </table>
-  </section>
-
-  <section class="book">
-    <h2>Prijava za članstvo</h2>
-    <form>
-      <label>Ime i prezime:</label><input type="text" placeholder="Unesi ime..." />
-      <label>Email:</label><input type="email" placeholder="Unesi email..." />
-      <label>Poruka:</label><textarea placeholder="Zašto želiš da se priključiš?"></textarea>
-      <button type="submit">Pošalji</button>
-    </form>
-  </section>
-
-  <footer>
-    &copy; 2025 Kuća Mudrosti. Sva prava zadržana.
-  </footer>
+    <script>
+        function calculate() {
+            const read = parseInt(document.getElementById('read').value);
+            const total = parseInt(document.getElementById('total').value);
+            if (isNaN(read) || isNaN(total) || total === 0) {
+                document.getElementById('output').innerText = 'Unesi ispravan broj stranica.';
+                return;
+            }
+            const percent = (read / total * 100).toFixed(1);
+            document.getElementById('output').innerText = `Pročitao/la si ${percent}% knjige.`;
+        }
+    </script>
 </body>
 </html>
